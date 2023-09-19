@@ -1,6 +1,7 @@
 package com.example.demo.config;
 
 import com.example.demo.entities.Order;
+import com.example.demo.entities.OrderStatus;
 import com.example.demo.entities.User;
 import com.example.demo.repositories.OrderRepository;
 import com.example.demo.repositories.UserRepository;
@@ -26,10 +27,10 @@ public class TestConfig implements CommandLineRunner {
         User user1 = new User(null, "pedro", "pedroajs@gmail", "21998536", "93810++001");
         User user2 = new User(null, "maria", "mariadb@gmail", "218966387", "810++001");
 
-        Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), user1);
-        Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), user2);
-        Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), user1);
-        Order o4 = new Order(null, Instant.now(), user2);
+        Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), OrderStatus.DELIVERED, user1);
+        Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"),OrderStatus.PENDING, user2);
+        Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"),OrderStatus.PAID, user1);
+        Order o4 = new Order(null, Instant.now(),OrderStatus.SHIPPED, user2);
 
         userRepository.saveAll(Arrays.asList(user1,user2));
         orderRepository.saveAll(Arrays.asList(o1, o2, o3, o4));
