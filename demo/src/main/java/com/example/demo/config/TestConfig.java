@@ -29,11 +29,19 @@ public class TestConfig implements CommandLineRunner {
     private ProductRepository productRepository;
     @Override
     public void run(String... args) throws Exception {
-        Category category1 = new Category(null, "Eletronico");
-        Category category2 = new Category(null, "Livros");
 
-        Product product1 = new Product(null, "Zeldinha","jogo zelda", 190.0, "url/...");
-        Product product2 = new Product(null, "Bom da Guerra","jogo do Kratos", 199.90, "url/...");
+        Category category1 = new Category(null, "Eletrônico");
+        Category category2 = new Category(null, "Livros");
+        Category category3 = new Category(null, "Videojogos");
+        categoryRepository.saveAll(Arrays.asList(category1, category2, category3));
+
+        Product product1 = new Product(null, "Zeldinha", "jogo zelda", 190.0, "url/...");
+        Product product2 = new Product(null, "Bom da Guerra", "jogo do Kratos", 199.90, "url/...");
+        product1.getCategories().add(category3);
+        product2.getCategories().add(category3);
+        product2.getCategories().add(category1);
+        productRepository.saveAll(Arrays.asList(product1, product2));
+
 
         User user1 = new User(null, "pedro", "pedroajs@gmail", "21998536", "93810++001");
         User user2 = new User(null, "maria", "mariadb@gmail", "218966387", "810++001");
@@ -45,7 +53,6 @@ public class TestConfig implements CommandLineRunner {
 
         userRepository.saveAll(Arrays.asList(user1,user2));
         orderRepository.saveAll(Arrays.asList(o1, o2, o3, o4));
-        categoryRepository.saveAll(Arrays.asList(category1, category2));
-        productRepository.saveAll(Arrays.asList(product1, product2));
+
     }
 }
