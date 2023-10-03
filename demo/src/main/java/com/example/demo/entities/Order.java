@@ -1,7 +1,6 @@
 package com.example.demo.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -73,6 +72,14 @@ public class Order  implements Serializable {
 
     public void setClient(User client) {
         this.client = client;
+    }
+
+    public Double getTotal(){
+        double sum = 0.0;
+        for(OrderItem item: items){
+            sum = sum + item.getSubTotal();
+        }
+        return sum;
     }
 
     @Override
